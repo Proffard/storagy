@@ -5,7 +5,7 @@ module Storagy
   class BucketUrlError < StandardError ; end
 
   def self.set_aws_credentials_from_storagy
-    if ENV['STORAGY_S3_BUCKET_URL']
+    if ENV['STORAGY_S3_BUCKET_URL'] and !(ENV['AWS_ACCESS_KEY_ID'] || ENV['AWS_SECRET_ACCESS_KEY'] )
       ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'] = get_aws_storagy_credentials
     else
       raise BucketUrlError, "Storagy bucket url STORAGY_S3_URL is not configured.\nMake sure you provisioned Storagy successfully."
