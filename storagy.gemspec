@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = Storagy::VERSION
   spec.authors       = ["Nikolay Samokhin"]
   spec.email         = ["nsamokhin@aligntech.com"]
-  spec.summary       = %q{TODO: Write a short summary. Required.}
-  spec.description   = %q{TODO: Write a longer description. Optional.}
+  spec.summary       = %q{Configure your app with Storagy bucket automatically}
+  spec.description   = %q{This gem provides useful methods and API wrappers}
   spec.homepage      = ""
   spec.license       = "MIT"
 
