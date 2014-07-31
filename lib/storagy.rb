@@ -1,14 +1,13 @@
 require "storagy/version"
-require "storagy/railtie" if defined?(Rails)
 
 module Storagy
   class BucketUrlError < StandardError ; end
 
   def self.set_aws_credentials_from_storagy
-    if ENV['STORAGY_S3_BUCKET_URL']
-      ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'] = get_aws_storagy_credentials
+    if ENV['STORAGY_S3_BUCKET_URL'] 
+      ENV['AWS_ACCESS_KEY_ID'], ENV['AWS_SECRET_ACCESS_KEY'] = get_aws_storagy_credentials unless (ENV['AWS_ACCESS_KEY_ID'] || ENV['AWS_SECRET_ACCESS_KEY'])
     else
-      raise BucketUrlError, "Storagy bucket url STORAGY_S3_URL is not configured.\nMake sure you provisioned Storagy successfully."
+      raise BucketUrlError, "Storagy bucket url STORAGY_S3_BUCKET_URL is not configured.\nMake sure you provisioned Storagy successfully."
     end
   end
 
@@ -21,3 +20,5 @@ module Storagy
     return keys.first, keys.last
   end
 end
+
+Storagy.set_aws_credentials_from_storagy if ENV['STORAGY_S3_BUCKET_URL']
